@@ -36,26 +36,20 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
 
     public static String TAG = "CreateMeeting";
     public static String MEETING_COLOR = "MEETING_COLOR";
-    public static int ADD_GUESTS = 0;
+    public static int REQUEST_ADD_GUESTS = 1;
 
     private RelativeLayout activityCreateMeeting;
-    private TextView tvPickColor;
-    private TextView tvMeetingName;
     private EditText etMeetingName;
     private TextView tvMeetingDescription;
     private EditText etMeetingDescription;
     private SpectrumPalette palette;
-    private TextView tvPickDateTime;
     private ImageButton btnOpenCalendar;
     private TextView tvDate;
     private TextView tvTimeFrom;
     private ImageButton btnOpenFromTime;
     private TextView tvTimeTo;
     private ImageButton btnOpenToTime;
-    private LinearLayout llDate;
-    private LinearLayout llFromDate;
     private TextView tvTimefrom;
-    private LinearLayout llToDate;
     private TextView tvTimeto;
     private TextView tvPickLocation;
     private TextView tvAddGuests;
@@ -89,23 +83,16 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
         timeFirstSet = 0;
         meetingColor = Color.rgb(63, 81, 181);
         activityCreateMeeting = (RelativeLayout) findViewById(R.id.activity_create_meeting);
-        tvPickColor = (TextView) findViewById(R.id.tv_pick_color);
-        tvMeetingName = (TextView) findViewById(R.id.tv_meeting_name);
         etMeetingName = (EditText) findViewById(R.id.et_meeting_name);
-        tvMeetingDescription = (TextView) findViewById(R.id.tv_meeting_description);
         etMeetingDescription = (EditText) findViewById(R.id.et_meeting_description);
         palette = (SpectrumPalette) findViewById(R.id.palette);
-        tvPickDateTime = (TextView) findViewById(R.id.tv_pick_date_time);
         btnOpenCalendar = (ImageButton) findViewById(R.id.btn_open_calendar);
         tvDate = (TextView) findViewById(R.id.tv_date);
         tvTimeFrom = (TextView) findViewById(R.id.tv_time_from);
         btnOpenFromTime = (ImageButton) findViewById(R.id.btn_open_from_time);
         tvTimeTo = (TextView) findViewById(R.id.tv_time_to);
         btnOpenToTime = (ImageButton) findViewById(R.id.btn_open_to_time);
-        llDate = (LinearLayout) findViewById(R.id.ll_date);
-        llFromDate = (LinearLayout) findViewById(R.id.ll_from_date);
         tvTimefrom = (TextView) findViewById(R.id.tv_timefrom);
-        llToDate = (LinearLayout) findViewById(R.id.ll_to_date);
         tvTimeto = (TextView) findViewById(R.id.tv_timeto);
         tvPickLocation = (TextView) findViewById(R.id.tv_pick_location);
         tvAddGuests = (TextView) findViewById(R.id.tv_add_guests);
@@ -123,19 +110,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
         toHour = dateToday.get(Calendar.HOUR_OF_DAY) + 1;
         fromMinute = dateToday.get(Calendar.MINUTE);
         toMinute = dateToday.get(Calendar.MINUTE) + 1;
-
-        tf_roboto = Typeface.createFromAsset(getAssets(), "fonts/roboto_regular.ttf");
-        tvPickColor.setTypeface(tf_roboto);
-        tvMeetingDescription.setTypeface(tf_roboto);
-        tvMeetingName.setTypeface(tf_roboto);
-        tvPickDateTime.setTypeface(tf_roboto);
-        tvTimeFrom.setTypeface(tf_roboto);
-        tvTimeTo.setTypeface(tf_roboto);
-        tvDate.setTypeface(tf_roboto);
-        tvTimefrom.setTypeface(tf_roboto);
-        tvTimeto.setTypeface(tf_roboto);
-        tvPickLocation.setTypeface(tf_roboto);
-        tvAddGuests.setTypeface(tf_roboto);
 
         palette.setOnColorSelectedListener(this);
         btnOpenCalendar.setOnClickListener(this);
@@ -212,7 +186,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
         } else if (view.getId() == btnAddGuests.getId()) {
             Intent i = new Intent(this, AddGuestsActivity.class);
             i.putExtra(MEETING_COLOR, meetingColor);
-            startActivityForResult(i, ADD_GUESTS);
+            startActivityForResult(i, REQUEST_ADD_GUESTS);
         }
     }
 
@@ -291,7 +265,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == ADD_GUESTS)
+        if(requestCode == REQUEST_ADD_GUESTS)
         {
             Log.d(TAG, "From Add Guests");
             ArrayList<String> guests = data.getParcelableExtra("List_of_Names");

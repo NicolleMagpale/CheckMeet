@@ -16,14 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Meeting Name"
-                android:id="@+id/tv_meeting_name"
                 android:textSize="20sp"
                 />
 
@@ -32,7 +32,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/et_meeting_name"
                 android:textSize="15sp"
-                android:layout_below="@id/tv_meeting_name"
                 android:layout_marginBottom="15dp"
                 />
 
@@ -40,9 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Meeting Description"
-                android:id="@+id/tv_meeting_description"
                 android:textSize="20sp"
-                android:layout_below="@id/et_meeting_name"
                 />
 
             <EditText
@@ -50,15 +47,12 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/et_meeting_description"
                 android:textSize="15sp"
-                android:layout_below="@id/tv_meeting_description"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pick a color"
-                android:id="@+id/tv_pick_color"
-                android:layout_below="@id/et_meeting_description"
                 android:textSize="20sp"
                 />
 
@@ -68,15 +62,12 @@
                 android:layout_height="wrap_content"
                 app:spectrum_autoPadding="true"
                 app:spectrum_colors="@array/demo_colors"
-                android:layout_below="@id/tv_pick_color"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pick a date and time"
-                android:id="@+id/tv_pick_date_time"
-                android:layout_below="@id/palette"
                 android:textSize="20sp"
                 android:layout_marginBottom="10dp"
                 />
@@ -84,8 +75,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@id/tv_pick_date_time"
-                android:id="@+id/ll_date"
                 android:layout_marginBottom="10dp">
                 <TextView
                     android:layout_width="wrap_content"
@@ -110,8 +99,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@id/ll_date"
-                android:id="@+id/ll_from_date"
                 android:layout_marginBottom="10dp">
                 <TextView
                     android:layout_width="60dp"
@@ -144,8 +131,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@id/ll_from_date"
-                android:id="@+id/ll_to_date"
                 android:layout_marginBottom="10dp">
                 <TextView
                     android:layout_width="60dp"
@@ -178,7 +163,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@id/ll_to_date"
                 android:id="@+id/ll_pick_location"
                 android:layout_marginBottom="10dp">
                 <TextView
@@ -186,7 +170,6 @@
                     android:layout_height="wrap_content"
                     android:text="Pick a location"
                     android:id="@+id/tv_pick_location"
-                    android:layout_below="@id/ll_to_date"
                     android:textSize="20sp"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
@@ -204,7 +187,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@id/ll_pick_location"
                 android:id="@+id/ll_add_guests"
                 android:layout_marginBottom="10dp">
                 <TextView
@@ -226,7 +208,7 @@
                     android:background="#00000000"
                     />
             </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
 
     </ScrollView>
 

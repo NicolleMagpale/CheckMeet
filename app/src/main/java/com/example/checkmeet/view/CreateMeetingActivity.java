@@ -268,8 +268,9 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
         if(requestCode == REQUEST_ADD_GUESTS)
         {
             Log.d(TAG, "From Add Guests");
-            ArrayList<String> guests = data.getParcelableExtra("List_of_Names");
+            ArrayList<String> guests = data.getStringArrayListExtra(AddGuestsActivity.GUEST_LIST_TAG);
 
+            Toast.makeText(getBaseContext(), "size " + String.valueOf(guests.size()), Toast.LENGTH_SHORT).show();
             Log.d(TAG, String.valueOf(guests.size()));
 
         }

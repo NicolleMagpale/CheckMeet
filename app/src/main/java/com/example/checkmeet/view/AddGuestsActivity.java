@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.checkmeet.R;
 import com.example.checkmeet.adapter.GuestAdapter;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 public class AddGuestsActivity extends AppCompatActivity {
 
     public static String TAG = "Add Guests";
+    public static String GUEST_LIST_TAG = "GUEST_LIST_TAG";
 
     private LinearLayout activityAddGuests;
     private RecyclerView rvAddGuest;
@@ -85,14 +87,25 @@ public class AddGuestsActivity extends AppCompatActivity {
 
         final MenuItem menuItem = menu.add(Menu.NONE, 1000, Menu.NONE, s);
         MenuItemCompat.setShowAsAction(menuItem, MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+
+                Toast.makeText(getBaseContext(), "BACK PRESSED ", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.putStringArrayListExtra(GUEST_LIST_TAG, guestList);
+                setResult(RESULT_OK, intent);
+                finish();
+
+                return true;
+            }
+        });
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d(TAG, "BACK PRESS");
-        super.onBackPressed();
-        getIntent().putExtra("List_of_Names",guestList);
+
         return super.onOptionsItemSelected(item);
     }
 }

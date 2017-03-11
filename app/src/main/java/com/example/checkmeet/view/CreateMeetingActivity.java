@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.ColorInt;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TypefaceSpan;
@@ -15,12 +18,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.checkmeet.R;
+import com.example.checkmeet.adapter.GuestAdapter;
 import com.thebluealliance.spectrum.SpectrumPalette;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
@@ -40,7 +43,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
 
     private RelativeLayout activityCreateMeeting;
     private EditText etMeetingName;
-    private TextView tvMeetingDescription;
     private EditText etMeetingDescription;
     private SpectrumPalette palette;
     private ImageButton btnOpenCalendar;
@@ -51,7 +53,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
     private ImageButton btnOpenToTime;
     private TextView tvTimefrom;
     private TextView tvTimeto;
-    private TextView tvPickLocation;
     private TextView tvAddGuests;
     private ImageButton btnAddGuests;
     private ImageButton btnPickLocation;
@@ -64,9 +65,11 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
     private int toMinute;
     private int meetingColor;
 
-
     public static Typeface tf_roboto;
-    private android.support.v7.app.ActionBar actionBar;
+    private ActionBar actionBar;
+
+    private RecyclerView rvAddedGuests;
+    private LinearLayoutManager llManager;
 
 
     @Override
@@ -94,10 +97,10 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
         btnOpenToTime = (ImageButton) findViewById(R.id.btn_open_to_time);
         tvTimefrom = (TextView) findViewById(R.id.tv_timefrom);
         tvTimeto = (TextView) findViewById(R.id.tv_timeto);
-        tvPickLocation = (TextView) findViewById(R.id.tv_pick_location);
         tvAddGuests = (TextView) findViewById(R.id.tv_add_guests);
         btnAddGuests = (ImageButton) findViewById(R.id.btn_add_guests);
         btnPickLocation = (ImageButton) findViewById(R.id.btn_pick_location);
+        rvAddedGuests = (RecyclerView) findViewById(R.id.rv_added_guests);
         actionBar = getSupportActionBar();
 
         Calendar dateToday = Calendar.getInstance();
@@ -265,10 +268,16 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_ADD_GUESTS)
-        {
+        if (requestCode == REQUEST_ADD_GUESTS) {
             Log.d(TAG, "From Add Guests");
             ArrayList<String> guests = data.getStringArrayListExtra(AddGuestsActivity.GUEST_LIST_TAG);
+
+            //TODO: Make new ADAPTER FOR THIS.
+            llManager = new LinearLayoutManager(this);
+            llManager.setOrientation(LinearLayoutManager.VERTICAL);
+            rvAddedGuests.setLayoutManager(llManager);
+            GuestAdapter ga = new GuestAdapter(guests);
+            rvAddedGuests.setAdapter(ga);
 
             Toast.makeText(getBaseContext(), "size " + String.valueOf(guests.size()), Toast.LENGTH_SHORT).show();
             Log.d(TAG, String.valueOf(guests.size()));

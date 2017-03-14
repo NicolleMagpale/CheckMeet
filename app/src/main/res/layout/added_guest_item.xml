@@ -8,6 +8,7 @@
         android:layout_height="25dp"
         android:textSize="15sp"
         android:id="@+id/tv_guest_name"
+        android:paddingLeft="15dp"
         />
     <ImageButton
         android:layout_width="wrap_content"
@@ -15,6 +16,5 @@
         android:src="@drawable/places_ic_clear"
         android:background="#0000"
         android:layout_alignParentRight="true"
-        android:paddingLeft="15dp"
         />
 </RelativeLayout>

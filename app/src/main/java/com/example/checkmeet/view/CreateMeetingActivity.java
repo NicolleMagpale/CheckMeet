@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.checkmeet.R;
+import com.example.checkmeet.adapter.AddedGuestsAdapter;
 import com.example.checkmeet.adapter.GuestAdapter;
 import com.thebluealliance.spectrum.SpectrumPalette;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -276,11 +277,11 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
             llManager = new LinearLayoutManager(this);
             llManager.setOrientation(LinearLayoutManager.VERTICAL);
             rvAddedGuests.setLayoutManager(llManager);
-            GuestAdapter ga = new GuestAdapter(guests);
-            rvAddedGuests.setAdapter(ga);
+            AddedGuestsAdapter aga = new AddedGuestsAdapter(guests);
+            rvAddedGuests.setAdapter(aga);
 
             Toast.makeText(getBaseContext(), "size " + String.valueOf(guests.size()), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, String.valueOf(guests.size()));
+            Log.d(TAG, "Guests size: " + String.valueOf(guests.size()));
 
         }
     }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,8 +58,7 @@ public class AddedGuestsAdapter extends RecyclerView.Adapter<AddedGuestsAdapter.
             this.tvGuestName = (TextView) view.findViewById(R.id.tv_guest_name);
         }
 
-        public void bindText(String name)
-        {
+        public void bindText(String name) {
             tvGuestName.setText(name);
         }
     }

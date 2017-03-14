@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.checkmeet.R;
@@ -21,6 +22,8 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
 
     private ArrayList<String> guestListName;
     public static String TAG = "Guest Adapter";
+    GuestViewHolder viewHolder;
+    private ArrayList<String> checked;
 
     public GuestAdapter(ArrayList<String> guestList)
     {
@@ -35,7 +38,8 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
     @Override
     public GuestViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.guest_item, parent, false);
-        GuestViewHolder viewHolder = new GuestViewHolder(view);
+        viewHolder = new GuestViewHolder(view);
+        checked = new ArrayList<>();
         return viewHolder;
     }
 
@@ -44,6 +48,17 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
         Log.d(TAG, "on Bind View Holder");
         String guestName = guestListName.get(position);
         holder.bindText(guestName);
+    }
+
+    public GuestViewHolder getViewHolder()
+    {
+        return viewHolder;
+    }
+
+    public ArrayList<String> getList()
+    {
+        Log.d(TAG, "YYYYYYYYYYYYYYYYYYYYYYYYYYY" + checked.size());
+        return checked;
     }
 
     @Override
@@ -65,6 +80,16 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
         {
             tvGuestName.setText(name);
             tvGuestName.setTypeface(CreateMeetingActivity.tf_roboto);
+            cbGuest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(cbGuest.isChecked())
+                    {
+                        Log.d(TAG, "CHECKED");
+                        checked.add(tvGuestName.getText().toString());
+                    }
+                }
+            });
         }
     }
 }

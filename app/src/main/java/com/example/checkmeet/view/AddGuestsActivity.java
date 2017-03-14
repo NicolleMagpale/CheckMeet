@@ -30,6 +30,7 @@ public class AddGuestsActivity extends AppCompatActivity {
     private RecyclerView rvAddGuest;
     private LinearLayoutManager llManager;
     private ArrayList<String> guestList;
+    private GuestAdapter ga;
     //private Toolbar toolbar;
     private android.support.v7.app.ActionBar actionBar;
 
@@ -52,7 +53,7 @@ public class AddGuestsActivity extends AppCompatActivity {
         llManager = new LinearLayoutManager(this);
         llManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvAddGuest.setLayoutManager(llManager);
-        GuestAdapter ga = new GuestAdapter(guestList);
+        ga = new GuestAdapter(guestList);
         rvAddGuest.setAdapter(ga);
 
         String name = "Add Guests"; // your string here
@@ -93,7 +94,8 @@ public class AddGuestsActivity extends AppCompatActivity {
 
                 Toast.makeText(getBaseContext(), "BACK PRESSED ", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent();
-                intent.putStringArrayListExtra(GUEST_LIST_TAG, guestList);
+
+                intent.putStringArrayListExtra(GUEST_LIST_TAG, ga.getList());
                 setResult(RESULT_OK, intent);
                 finish();
 

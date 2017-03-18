@@ -25,6 +25,9 @@ import android.widget.Toast;
 import com.example.checkmeet.R;
 import com.example.checkmeet.adapter.AddedGuestsAdapter;
 import com.example.checkmeet.adapter.GuestAdapter;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
 import com.thebluealliance.spectrum.SpectrumPalette;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
@@ -38,9 +41,11 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
         TimePickerDialog.OnTimeSetListener {
 
 
-    public static String TAG = "CreateMeeting";
-    public static String MEETING_COLOR = "MEETING_COLOR";
-    public static int REQUEST_ADD_GUESTS = 1;
+    public static final String TAG = "CreateMeeting";
+    public static final String MEETING_COLOR = "MEETING_COLOR";
+    public static final int REQUEST_ADD_GUESTS = 1;
+    private static final int PLACE_PICKER_REQUEST = 2;
+
 
     private RelativeLayout activityCreateMeeting;
     private EditText etMeetingName;
@@ -57,6 +62,8 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
     private TextView tvAddGuests;
     private ImageButton btnAddGuests;
     private ImageButton btnPickLocation;
+
+    private TextView tv_selected_location;
 
     private int timeFlag;
     private int timeFirstSet;
@@ -102,6 +109,9 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
         btnAddGuests = (ImageButton) findViewById(R.id.btn_add_guests);
         btnPickLocation = (ImageButton) findViewById(R.id.btn_pick_location);
         rvAddedGuests = (RecyclerView) findViewById(R.id.rv_added_guests);
+
+        tv_selected_location = (TextView) findViewById(R.id.tv_selected_location);
+
         actionBar = getSupportActionBar();
 
         Calendar dateToday = Calendar.getInstance();
@@ -191,6 +201,18 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
             Intent i = new Intent(this, AddGuestsActivity.class);
             i.putExtra(MEETING_COLOR, meetingColor);
             startActivityForResult(i, REQUEST_ADD_GUESTS);
+        } else if (view.getId() == btnPickLocation.getId()) {
+
+            Toast.makeText(this, "Opening map...", Toast.LENGTH_SHORT).show();
+
+            // open place picker
+            PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+            try {
+                startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
+            } catch (GooglePlayServicesRepairableException |
+                    GooglePlayServicesNotAvailableException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -283,6 +305,32 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
             Toast.makeText(getBaseContext(), "size " + String.valueOf(guests.size()), Toast.LENGTH_SHORT).show();
             Log.d(TAG, "Guests size: " + String.valueOf(guests.size()));
 
+        } else if(requestCode == PLACE_PICKER_REQUEST) {
+            switch(resultCode) {
+                case RESULT_OK:
+
+                    Place place = PlacePicker.getPlace(getBaseContext(), data);
+
+                    String finalAddress;
+
+                    // check if coordinates
+                    if(place.getName().toString().contains("°")) {
+                        finalAddress = place.getAddress().toString();
+                    } else {
+                        finalAddress = place.getName().toString() + ", " +
+                                place.getAddress().toString();
+                    }
+
+                    String toastMsg = String.format("Place: %s", finalAddress);
+                    Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+
+                    tv_selected_location.setText(finalAddress);
+                    tv_selected_location.setVisibility(View.VISIBLE);
+
+                    break;
+                case RESULT_CANCELED:
+                    break;
+            }
         }
     }
 }

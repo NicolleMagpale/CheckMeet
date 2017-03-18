@@ -109,6 +109,5 @@ public class AddGuestsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
 
-        
     }
 }

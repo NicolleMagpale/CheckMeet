@@ -43,7 +43,8 @@
         <activity android:name=".view.ViewLocationActivity" />
         <activity android:name=".view.AddGuestsActivity" />
         <activity android:name=".view.CreateMeetingActivity" />
-        <activity android:name=".view.EditMeetingActivity"></activity>
+        <activity android:name=".view.EditMeetingActivity"/>
+
     </application>
 
 </manifest>

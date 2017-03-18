@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.thebluealliance.spectrum.SpectrumPalette;
+import com.example.checkmeet.R;
 
 public class EditMeetingActivity extends AppCompatActivity {
 

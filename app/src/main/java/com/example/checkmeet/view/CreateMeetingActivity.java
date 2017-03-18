@@ -23,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.checkmeet.R;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.example.checkmeet.adapter.AddedGuestsAdapter;
 import com.example.checkmeet.adapter.GuestAdapter;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;

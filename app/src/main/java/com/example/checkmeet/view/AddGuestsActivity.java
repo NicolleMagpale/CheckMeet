@@ -107,7 +107,8 @@ public class AddGuestsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
 
+        finish();
+        return super.onOptionsItemSelected(item);
     }
 }

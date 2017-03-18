@@ -3,11 +3,12 @@
     package="com.example.checkmeet">
 
     <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
-    -->
+        The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+        Google Maps Android API v2, but you must specify either coarse or fine
+        location permissions for the 'MyLocation' functionality.
+   -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -40,9 +41,13 @@
         <activity
             android:name=".view.ChooseLocationActivity"
             android:label="@string/title_activity_choose_location" />
-        <activity android:name=".view.ViewLocationActivity" />
+        <activity
+            android:name=".view.ViewLocationActivity"
+            android:label="@string/title_activity_view_location"/>
         <activity android:name=".view.AddGuestsActivity" />
-        <activity android:name=".view.CreateMeetingActivity" />
+        <activity
+            android:name=".view.CreateMeetingActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".view.EditMeetingActivity"/>
 
     </application>

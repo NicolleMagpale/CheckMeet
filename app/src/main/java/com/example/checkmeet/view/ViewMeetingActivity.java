@@ -84,6 +84,8 @@ public class ViewMeetingActivity extends AppCompatActivity implements View.OnCli
         switch(id) {
             case R.id.popup_edit:
                 Toast.makeText(this, "EDIT", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(this, EditMeetingActivity.class);
+                startActivity(i);
                 break;
             case R.id.popup_delete:
                 Toast.makeText(this, "DELETE", Toast.LENGTH_SHORT).show();

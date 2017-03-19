@@ -1,5 +1,6 @@
 package com.example.checkmeet.view;
 
+import android.database.Cursor;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -18,11 +19,11 @@ import java.util.List;
 public abstract class ViewMeetingsBaseFragment extends Fragment implements
         MeetingItemClickCallback {
 
-    protected List<Meeting> meetingList;
+    protected Cursor cursor;
 
     protected RecyclerView recView;
     protected MeetingListsAdapter adapter;
-    protected SwipeRefreshLayout swipeRefreshLayout;
+//    protected SwipeRefreshLayout swipeRefreshLayout;
     protected TextView tv_no_meetings_found;
 
 }

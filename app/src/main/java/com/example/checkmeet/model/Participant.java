@@ -8,7 +8,7 @@ public class Participant {
 
     // db attributes
     public static final String TABLE_NAME = "participant";
-    public static final String COL_PARTICIPANTID = "participant_id";
+    public static final String COL_PARTICIPANTID = "_id";
 
     private int participant_id;
 

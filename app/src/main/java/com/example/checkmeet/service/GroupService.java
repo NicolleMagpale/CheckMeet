@@ -31,8 +31,8 @@ public class GroupService {
         List<Participant> memberList = group.getMemberList();
         for(int i = 0; i < memberList.size(); i ++) {
             contentValues = new ContentValues();
-            contentValues.put(Group.COL_GROUPID, result);
-            contentValues.put(Participant.COL_PARTICIPANTID,
+            contentValues.put(Group.GROUP_PARTICIPANT_COL_GROUPID, result);
+            contentValues.put(Group.GROUP_PARTICIPANT_COL_PARTICIPANTID,
                     memberList.get(0).getParticipant_id());
 
             db.insert(Group.TABLE_NAME_GROUP_PARTICIPANT, null, contentValues);
@@ -68,7 +68,7 @@ public class GroupService {
                                               int group_id) {
 
         // remove all participants in group
-        String selection = Group.COL_GROUPID + " = ?";
+        String selection = Group.GROUP_PARTICIPANT_COL_GROUPID + " = ?";
         String[] selectionArgs = {group_id + ""};
 
         db.delete(Group.TABLE_NAME_GROUP_PARTICIPANT, selection, selectionArgs);
@@ -95,6 +95,9 @@ public class GroupService {
         int result = db.delete(Group.TABLE_NAME, selection, selectionArgs);
 
         ///// group_participant table /////
+        selection = Group.GROUP_PARTICIPANT_COL_GROUPID + " = ?";
+        selectionArgs = new String[] {group_id + ""};
+
         db.delete(Group.TABLE_NAME_GROUP_PARTICIPANT, selection, selectionArgs);
 
         db.close();
@@ -132,10 +135,7 @@ public class GroupService {
         cursor.close();
 
         if(group != null) {
-            selection =
-                    Group.TABLE_NAME + "." + Group.COL_GROUPID + " = ? AND " +
-                    Group.TABLE_NAME + "." + Group.COL_GROUPID + " = " +
-                    Group.TABLE_NAME_GROUP_PARTICIPANT + "." + Group.COL_GROUPID;
+            selection = Group.GROUP_PARTICIPANT_COL_GROUPID + " = ?";
 
             cursor = db.query(Group.TABLE_NAME_GROUP_PARTICIPANT, null,
                     selection, selectionArgs, null, null, null);

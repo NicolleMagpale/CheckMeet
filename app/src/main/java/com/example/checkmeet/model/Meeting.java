@@ -10,21 +10,29 @@ public class Meeting {
 
     // db attributes
     public static final String TABLE_NAME = "meeting";
-    public static final String TABLE_NAME_MEETING_PARTICIPANTS = "meeting_participant";
 
-    public static final String COL_MEETINGID = "meeting_id";
+    public static final String COL_MEETINGID = "_id";
     public static final String COL_TITLE = "title";
     public static final String COL_DESCRIPTION = "description";
     public static final String COL_DATE = "date";
     public static final String COL_TIMESTART = "starttime";
     public static final String COL_TIMEEND = "endtime";
     public static final String COL_HOST_NAME = "host_name";
-    public static final String COL_HOST_NUMBER = "host_number";
+    public static final String COL_IS_HOST = "isHost";
     public static final String COL_COLOR = "color";
     public static final String COL_ADDRESS = "address";
     public static final String COL_LATITUDE = "latitude";
     public static final String COL_LONGITUDE = "longitude";
     public static final String COL_PARTICIPANTS_STRING = "string_participants";
+
+    public static final String TABLE_NAME_MEETING_PARTICIPANTS = "meeting_participant";
+    public static final String MEETING_PARTICIPANTS_COL_ID = "_id";
+    public static final String MEETING_PARTICIPANTS_COL_MEETINGID = "meeting_id";
+    public static final String MEETING_PARTICIPANTS_COL_PARTICIPANTID = "participant_id";
+
+
+    public static final int FLAG_IS_HOST = 1;
+    public static final int FLAG_IS_NOT_HOST = 0;
 
 
     /// final attributes
@@ -35,17 +43,13 @@ public class Meeting {
     private int startTime;
     private int endTime;
     private int color;
+    private boolean isHost;
     private String host_name;
-    private String host_number;
     private List<Participant> participantList;
     private String address;
     private double latitude;
     private double longitude;
     private String stringParticipants;
-
-    // private String title;
-    private String month;
-    // private int color;
 
     public String getTitle() {
         return title;
@@ -53,14 +57,6 @@ public class Meeting {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getMonth() {
-        return month;
-    }
-
-    public void setMonth(String month) {
-        this.month = month;
     }
 
     public int getColor() {
@@ -159,11 +155,11 @@ public class Meeting {
         this.host_name = host_name;
     }
 
-    public String getHostNumber() {
-        return host_number;
+    public boolean isHost() {
+        return isHost;
     }
 
-    public void setHostNumber(String host_number) {
-        this.host_number = host_number;
+    public void setIsHost(boolean host) {
+        isHost = host;
     }
 }

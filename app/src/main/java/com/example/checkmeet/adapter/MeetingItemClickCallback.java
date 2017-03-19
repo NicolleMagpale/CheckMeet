@@ -5,6 +5,5 @@ package com.example.checkmeet.adapter;
  */
 
 public interface MeetingItemClickCallback {
-    void onItemClick(int p);
-    void onOptionsClick(int p, int id_item);
+    void onItemClick(int meeting_id);
 }

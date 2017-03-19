@@ -65,8 +65,6 @@ public class AddedGuestsAdapter extends RecyclerView.Adapter<AddedGuestsAdapter.
         public void bindText(String name) {
             tvGuestName.setText(name);
 
-            btnRemove.
-
 
         }
     }

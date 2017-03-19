@@ -3,12 +3,14 @@ package com.example.checkmeet.view;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import com.example.checkmeet.R;
 import com.example.checkmeet.adapter.MeetingListsAdapter;
 import com.example.checkmeet.model.Meeting;
 import com.example.checkmeet.model.Month;
+import com.example.checkmeet.service.MeetingService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,37 +46,37 @@ public class ViewAllMeetingsFragment extends ViewMeetingsBaseFragment {
 
         // set up views
         recView = (RecyclerView) rootView.findViewById(R.id.rv_all_meetings);
-        swipeRefreshLayout =
-                (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout_all);
+//        swipeRefreshLayout =
+//                (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout_all);
         tv_no_meetings_found = (TextView) rootView.findViewById(R.id.tv_no_meetings_found);
 
-        adapter = new MeetingListsAdapter(meetingList, getContext());
+        adapter = new MeetingListsAdapter(getContext(), cursor);
         recView.setLayoutManager(new LinearLayoutManager(getContext()));
         recView.setAdapter(adapter);
         adapter.setMeetingItemClickCallback(this);
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshItems();
-            }
-
-            void refreshItems() {
-
-                // load the whole set of data
-                refreshData();
-
-                // Load complete
-                onItemsLoadComplete();
-            }
-
-            void onItemsLoadComplete() {
-                // Update the adapter and notify data set changed
-                adapter.setItems(meetingList);
-                adapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                refreshItems();
+//            }
+//
+//            void refreshItems() {
+//
+//                // load the whole set of data
+//                refreshData();
+//
+//                // Load complete
+//                onItemsLoadComplete();
+//            }
+//
+//            void onItemsLoadComplete() {
+//                // Update the adapter and notify data set changed
+//                adapter.setItems(meetingList);
+//                adapter.notifyDataSetChanged();
+//                swipeRefreshLayout.setRefreshing(false);
+//            }
+//        });
 
         return rootView;
     }
@@ -82,74 +85,75 @@ public class ViewAllMeetingsFragment extends ViewMeetingsBaseFragment {
     public void onResume() {
         super.onResume();
 
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            recView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        // get cursor from db
+        Cursor cursor = MeetingService.getAllMeetings(getContext());
+
+        // check first if there are meetings
+        // if yes, show list
+        // if not, show error
+        if(adapter.getItemCount() == 0) {
+            recView.setVisibility(View.GONE);
+            tv_no_meetings_found.setVisibility(View.VISIBLE);
         } else {
-            recView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+            // will close the old cursor for you
+            adapter.changeCursor(cursor);
+
+            recView.setVisibility(View.VISIBLE);
+            tv_no_meetings_found.setVisibility(View.GONE);
+
+            if(getResources().getConfiguration().orientation ==
+                    Configuration.ORIENTATION_LANDSCAPE) {
+                recView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            } else {
+                recView.setLayoutManager(new LinearLayoutManager(getContext()));
+            }
         }
     }
 
     private void initData() {
-        this.meetingList = new ArrayList<>();
 
-        List<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#FFBBFF"));
-        colors.add(Color.parseColor("#EEBBEE"));
-        colors.add(Color.parseColor("#DFB0FF"));
-        colors.add(Color.parseColor("#DBBFF7"));
-        colors.add(Color.parseColor("#CBC5F5"));
-        colors.add(Color.parseColor("#BAD0EF"));
-        colors.add(Color.parseColor("#A5DBEB"));
-        colors.add(Color.parseColor("#B5FFC8"));
-        colors.add(Color.parseColor("#B3FF99"));
-        colors.add(Color.parseColor("#DFFFCA"));
-        colors.add(Color.parseColor("#FFFFC8"));
-        colors.add(Color.parseColor("#F7F9D0"));
+        cursor = MeetingService.getAllMeetings(getContext());
 
-        Meeting m;
-
-        for(int i = 0; i < 12; i ++) {
-            m = new Meeting();
-            m.setTitle("Meeting " + (i+1));
-            m.setMonth(Month.values()[i] + "");
-            m.setColor(colors.get(i));
-
-            meetingList.add(m);
-        }
+//        this.meetingList = new ArrayList<>();
+//
+//        List<Integer> colors = new ArrayList<>();
+//        colors.add(Color.parseColor("#FFBBFF"));
+//        colors.add(Color.parseColor("#EEBBEE"));
+//        colors.add(Color.parseColor("#DFB0FF"));
+//        colors.add(Color.parseColor("#DBBFF7"));
+//        colors.add(Color.parseColor("#CBC5F5"));
+//        colors.add(Color.parseColor("#BAD0EF"));
+//        colors.add(Color.parseColor("#A5DBEB"));
+//        colors.add(Color.parseColor("#B5FFC8"));
+//        colors.add(Color.parseColor("#B3FF99"));
+//        colors.add(Color.parseColor("#DFFFCA"));
+//        colors.add(Color.parseColor("#FFFFC8"));
+//        colors.add(Color.parseColor("#F7F9D0"));
+//
+//        Meeting m;
+//
+//        for(int i = 0; i < 12; i ++) {
+//            m = new Meeting();
+//            m.setTitle("Meeting " + (i+1));
+//            m.setMonth(Month.values()[i] + "");
+//            m.setColor(colors.get(i));
+//
+//            meetingList.add(m);
+//        }
     }
 
-    public void refreshData() {
-        // get data from server again
-
-        // temporarily initialize data again
-        initData();
-    }
+//    public void refreshData() {
+//        // get data from server again
+//
+//        // temporarily initialize data again
+//        initData();
+//    }
 
     @Override
-    public void onItemClick(int p) {
+    public void onItemClick(int meeting_id) {
         Intent intent = new Intent(getActivity(), ViewMeetingActivity.class);
-        intent.putExtra(ViewMeetingsActivity.EXTRA_MEETING_TITLE, meetingList.get(p).getTitle());
-        intent.putExtra(ViewMeetingsActivity.EXTRA_MEETING_COLOR, meetingList.get(p).getColor());
+        intent.putExtra(Meeting.COL_MEETINGID, meeting_id);
         startActivity(intent);
-    }
-
-    @Override
-    public void onOptionsClick(int p, int id_item) {
-
-        switch(id_item) {
-            case R.id.popup_edit:
-                Toast.makeText(getActivity(), "EDIT", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), EditMeetingActivity.class);
-                intent.putExtra(ViewMeetingsActivity.EXTRA_MEETING_TITLE, meetingList.get(p).getTitle());
-                intent.putExtra(ViewMeetingsActivity.EXTRA_MEETING_COLOR, meetingList.get(p).getColor());
-                startActivity(intent);
-                break;
-            case R.id.popup_delete:
-                Toast.makeText(getActivity(), "DELETE", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.popup_open_notes:
-                Toast.makeText(getActivity(), "OPEN NOTES", Toast.LENGTH_SHORT).show();
-                break;
-        }
     }
 }

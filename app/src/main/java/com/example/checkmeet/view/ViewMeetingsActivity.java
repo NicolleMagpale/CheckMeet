@@ -67,6 +67,7 @@ public class ViewMeetingsActivity extends AppCompatActivity
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                Log.d("ViewMeetingsActivity", "tab " + tab.getPosition());
                 viewPager.setCurrentItem(tab.getPosition());
             }
 

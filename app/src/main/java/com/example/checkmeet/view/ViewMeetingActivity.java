@@ -1,6 +1,7 @@
 package com.example.checkmeet.view;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,12 +9,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.checkmeet.R;
 import com.example.checkmeet.model.Meeting;
 import com.example.checkmeet.service.MeetingService;
+import com.example.checkmeet.utils.Utils;
 
 public class ViewMeetingActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,11 +42,33 @@ public class ViewMeetingActivity extends AppCompatActivity implements View.OnCli
         if(actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(meeting.getTitle());
+            actionBar.setBackgroundDrawable(new ColorDrawable(meeting.getColor()));
         }
 
-        ((TextView) findViewById(R.id.tv_member_list)).setText(
-                "Hazel Anne Brosas\nMavic Reccion\nNicolle Magpale\nCourtney Ngo"
+        // date
+        ((TextView) findViewById(R.id.tv_date)).setText(Utils.dateToString(meeting.getDate()));
+
+        // time
+        ((TextView) findViewById(R.id.tv_time)).setText(
+                Utils.dateIntegerToString(meeting.getStartTime()) + " - " +
+                        Utils.dateIntegerToString(meeting.getEndTime())
         );
+
+        // location
+        ((TextView) findViewById(R.id.tv_location)).setText(meeting.getAddress());
+
+        // description
+        if(meeting.getDescription() == null || meeting.getDescription().isEmpty()) {
+            findViewById(R.id.container_description).setVisibility(View.GONE);
+        } else {
+            ((TextView) findViewById(R.id.tv_description)).setText(meeting.getDescription());
+        }
+
+        // host
+        ((TextView) findViewById(R.id.tv_host_name)).setText(meeting.getHostName());
+
+        // participants
+        ((TextView) findViewById(R.id.tv_member_list)).setText(meeting.getStringParticipants());
 
         iv_open_view_map = (ImageView) findViewById(R.id.iv_open_view_map);
         iv_open_view_map.setOnClickListener(this);

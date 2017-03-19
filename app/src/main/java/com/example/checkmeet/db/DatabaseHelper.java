@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
 import android.util.Log;
 
 import com.example.checkmeet.R;
@@ -24,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     private static DatabaseHelper instance;
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "checkmeet.db";
 
     ///// SQL CREATE TABLES /////
@@ -149,7 +150,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         meeting.setAddress("Gokongwei Hall, Taft Avenue, Manila, NCR");
         meeting.setLatitude(14.5662743);
         meeting.setLongitude(120.9907974);
-        meeting.setColor(R.color.purple_fade);
+        meeting.setColor(Color.parseColor("#c7bad9"));
         meeting.setHostName("Courtney Ngo");
         meeting.setStringParticipants(participants);
 
@@ -168,7 +169,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         meeting.setAddress("Mall of Asia Arena, Mall of Asia Complex, Pasay, Metro Manila");
         meeting.setLatitude(14.5321663);
         meeting.setLongitude(120.9815684);
-        meeting.setColor(R.color.blue_fade);
+        meeting.setColor(Color.parseColor("#b1d9e7"));
         meeting.setHostName("Briane Samson");
         meeting.setStringParticipants(participants);
 
@@ -186,7 +187,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         meeting.setAddress("Food Trip, 1872 Velasquez St, Tondo 95, Maynila, 1012 Kalakhang Maynila");
         meeting.setLatitude(14.6188292);
         meeting.setLongitude(120.9634773);
-        meeting.setColor(R.color.yellow_fade);
+        meeting.setColor(Color.parseColor("#fad1a9"));
         meeting.setHostName("Roger Uy");
         meeting.setStringParticipants(participants);
 
@@ -205,7 +206,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         meeting.setAddress("Shangri-La at the Fort, Manila, 30th Street, Taguig, NCR");
         meeting.setLatitude(14.5524012);
         meeting.setLongitude(121.0450023);
-        meeting.setColor(R.color.orange_fade);
+        meeting.setColor(Color.parseColor("#ffe17a"));
         meeting.setHostName("Tessie Limoanco");
         meeting.setStringParticipants(participants);
 
@@ -223,7 +224,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         meeting.setAddress("Gokongwei Hall, Taft Avenue, Manila, NCR");
         meeting.setLatitude(14.5662743);
         meeting.setLongitude(120.9907974);
-        meeting.setColor(R.color.purple_fade);
+        meeting.setColor(Color.parseColor("#a7e0a5"));
         meeting.setHostName("Doc Mac");
         meeting.setStringParticipants(participants);
 

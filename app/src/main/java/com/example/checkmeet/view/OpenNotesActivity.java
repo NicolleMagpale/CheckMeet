@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.checkmeet.R;
 import com.example.checkmeet.model.Meeting;
@@ -69,12 +70,13 @@ public class OpenNotesActivity extends AppCompatActivity {
 
             notes.setNotes(et_notes.getText().toString());
             NotesService.updateNote(getBaseContext(), notes);
+
+            onBackPressed();
         } else {
             // pressed back button in actionbar
 
             // show alert
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                    getBaseContext());
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
             // set title
             alertDialogBuilder.setTitle("Save your changes?");
@@ -90,6 +92,9 @@ public class OpenNotesActivity extends AppCompatActivity {
                             notes.setNotes(et_notes.getText().toString());
                             NotesService.updateNote(getBaseContext(), notes);
 
+                            Toast.makeText(OpenNotesActivity.this,
+                                    "Saving changes...", Toast.LENGTH_SHORT).show();
+
                             onBackPressed();
                         }
                     })
@@ -103,8 +108,6 @@ public class OpenNotesActivity extends AppCompatActivity {
                     .setOnCancelListener(new DialogInterface.OnCancelListener() {
                         @Override
                         public void onCancel(DialogInterface dialog) {
-                            // if this button is clicked, just close
-                            // dialog box
                             dialog.cancel();
                         }
                     });

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,14 +53,19 @@ public class AddedGuestsAdapter extends RecyclerView.Adapter<AddedGuestsAdapter.
     public class AddedGuestViewHolder extends RecyclerView.ViewHolder{
 
         public TextView tvGuestName;
+        public ImageView btnRemove;
+
 
         public AddedGuestViewHolder(View view) {
             super(view);
             this.tvGuestName = (TextView) view.findViewById(R.id.tv_guest_name);
+            this.btnRemove = (ImageButton) view.findViewById(R.id.btn_remove);
         }
 
         public void bindText(String name) {
             tvGuestName.setText(name);
+
+            btnRemove.
 
 
         }

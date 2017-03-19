@@ -40,15 +40,26 @@
 
         <activity android:name=".view.AddGuestsActivity" />
         <activity
-            android:name=".view.CreateMeetingActivity"
-            android:windowSoftInputMode="stateHidden" />
+            android:name=".view.ViewContactsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.ViewLocationActivity"
             android:label="@string/title_activity_view_location" />
+        <activity android:name=".view.AddGuestsActivity" />
         <activity
-            android:name=".view.OpenNotesActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name=".view.EditMeetingActivity"/>
+            android:name=".view.CreateMeetingActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".view.EditMeetingActivity" />
+        <activity
+            android:name=".view.ViewGroupActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.AddGroupActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.EditGroupActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.AddGuestActivity"></activity>
 
     </application>
 

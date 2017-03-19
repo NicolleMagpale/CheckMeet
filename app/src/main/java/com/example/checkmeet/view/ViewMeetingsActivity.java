@@ -28,6 +28,7 @@ public class ViewMeetingsActivity extends AppCompatActivity
     public static final String EXTRA_MEETING_COLOR = "EXTRA_MEETING_COLOR";
 
     public static final int REQUEST_CODE_CREATE_MEETING = 1;
+    public static final int REQUEST_CODE_CONTACTS_LIST = 2;
 
     private MeetingsPagerAdapter adapter;
     private ViewPager viewPager;
@@ -121,17 +122,15 @@ public class ViewMeetingsActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_meetings) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_contacts) {
+            Intent i = new Intent(this, ViewContactsActivity.class);
+            startActivity(i);
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_about) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_signout) {
 
         }
 

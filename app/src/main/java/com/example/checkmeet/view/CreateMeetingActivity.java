@@ -93,7 +93,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
 
         timeFlag = 0;
         timeFirstSet = 0;
-        meetingColor = Color.rgb(63, 81, 181);
+        meetingColor = Color.rgb(255,152,0);
         activityCreateMeeting = (RelativeLayout) findViewById(R.id.activity_create_meeting);
         etMeetingName = (EditText) findViewById(R.id.et_meeting_name);
         etMeetingDescription = (EditText) findViewById(R.id.et_meeting_description);

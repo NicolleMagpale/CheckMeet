@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#ff9800</color>
+    <color name="colorPrimaryDark">#ff9800</color>
+    <color name="colorAccent">#5fd6e6</color>
 
-    <color name="purple_fade">#c7bad9</color>
-    <color name="blue_fade">#b1d9e7</color>
-    <color name="orange_fade">#fad1a9</color>
-    <color name="green_fade">#ffe17a</color>
-    <color name="yellow_fade">#a7e0a5</color>
+    <color name="purple_fade">#ce93d8</color>
+    <color name="blue_fade">#90caf9</color>
+    <color name="orange_fade">#ffcc80</color>
+    <color name="green_fade">#a5d6a7</color>
+    <color name="yellow_fade">#ffd54f</color>
     <color name="white">#ffffff</color>
     <color name="gray">#605d5d</color>
 

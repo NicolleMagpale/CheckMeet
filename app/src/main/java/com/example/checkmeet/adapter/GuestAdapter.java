@@ -87,11 +87,6 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
                     {
                         Log.d(TAG, "CHECKED");
                         checked.add(tvGuestName.getText().toString());
-                    }else
-                    {
-
-                        Log.d(TAG, "REMOVED CHECKED");
-                        checked.remove(tvGuestName.getText().toString());
                     }
                 }
             });

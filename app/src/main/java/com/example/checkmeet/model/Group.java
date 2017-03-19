@@ -1,9 +1,9 @@
 package com.example.checkmeet.model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
- * Created by victo on 3/18/2017.
+ * Created by Hazel on 19/03/2017.
  */
 
 public class Group {
@@ -20,23 +20,25 @@ public class Group {
     public static final String GROUP_PARTICIPANT_COL_PARTICIPANTID = "participant_id";
 
 
-    private int group_id;
+    private int id;
     private String name;
-    private List<Participant> memberList;
+    private ArrayList<Contact> participants;
 
-    public Group() {}
+    public Group() {
+    }
 
-    public Group(String name, List<Participant> memberList) {
+    public Group(int id, String name, ArrayList<Contact> participants) {
+        this.id = id;
         this.name = name;
-        this.memberList = memberList;
+        this.participants = participants;
     }
 
-    public int getGroup_id() {
-        return group_id;
+    public int getId() {
+        return id;
     }
 
-    public void setGroup_id(int group_id) {
-        this.group_id = group_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -47,11 +49,11 @@ public class Group {
         this.name = name;
     }
 
-    public List<Participant> getMemberList() {
-        return memberList;
+    public ArrayList<Contact> getParticipants() {
+        return participants;
     }
 
-    public void setMemberList(List<Participant> memberList) {
-        this.memberList = memberList;
+    public void setParticipants(ArrayList<Contact> participants) {
+        this.participants = participants;
     }
 }

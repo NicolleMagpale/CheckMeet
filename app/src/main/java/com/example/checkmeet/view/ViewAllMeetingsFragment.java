@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -118,10 +119,11 @@ public class ViewAllMeetingsFragment extends ViewMeetingsBaseFragment {
 //        this.meetingList = new ArrayList<>();
 //
 //        List<Integer> colors = new ArrayList<>();
-//        colors.add(Color.parseColor("#FFBBFF"));
-//        colors.add(Color.parseColor("#EEBBEE"));
-//        colors.add(Color.parseColor("#DFB0FF"));
-//        colors.add(Color.parseColor("#DBBFF7"));
+        // colors.add(Color.parseColor("#ce93d8"));
+        // colors.add(Color.parseColor("#90caf9"));
+        // colors.add(Color.parseColor("#ffcc80"));
+        // colors.add(Color.parseColor("#a5d6a7"));
+        // colors.add(Color.parseColor("#ffd54f"));
 //        colors.add(Color.parseColor("#CBC5F5"));
 //        colors.add(Color.parseColor("#BAD0EF"));
 //        colors.add(Color.parseColor("#A5DBEB"));

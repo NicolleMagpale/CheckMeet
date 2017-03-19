@@ -98,18 +98,22 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
         activityCreateMeeting = (RelativeLayout) findViewById(R.id.activity_create_meeting);
         etMeetingName = (EditText) findViewById(R.id.et_meeting_name);
         etMeetingDescription = (EditText) findViewById(R.id.et_meeting_description);
+
         palette = (SpectrumPalette) findViewById(R.id.palette);
-        btnOpenCalendar = (ImageButton) findViewById(R.id.btn_open_calendar);
+
         tvDate = (TextView) findViewById(R.id.tv_date);
         tvTimeFrom = (TextView) findViewById(R.id.tv_time_from);
-        btnOpenFromTime = (ImageButton) findViewById(R.id.btn_open_from_time);
         tvTimeTo = (TextView) findViewById(R.id.tv_time_to);
-        btnOpenToTime = (ImageButton) findViewById(R.id.btn_open_to_time);
         tvTimefrom = (TextView) findViewById(R.id.tv_timefrom);
         tvTimeto = (TextView) findViewById(R.id.tv_timeto);
         tvAddGuests = (TextView) findViewById(R.id.tv_add_guests);
+
+        btnOpenFromTime = (ImageButton) findViewById(R.id.btn_open_from_time);
+        btnOpenCalendar = (ImageButton) findViewById(R.id.btn_open_calendar);
+        btnOpenToTime = (ImageButton) findViewById(R.id.btn_open_to_time);
         btnAddGuests = (ImageButton) findViewById(R.id.btn_add_guests);
         btnPickLocation = (ImageButton) findViewById(R.id.btn_pick_location);
+
         rvAddedGuests = (RecyclerView) findViewById(R.id.rv_added_guests);
 
         tv_selected_location = (TextView) findViewById(R.id.tv_selected_location);

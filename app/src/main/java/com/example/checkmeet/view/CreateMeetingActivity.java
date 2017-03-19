@@ -23,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.checkmeet.R;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.example.checkmeet.adapter.AddedGuestsAdapter;
 import com.example.checkmeet.adapter.GuestAdapter;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -170,7 +172,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
 
         Log.d(TAG, "Meeting Color changed to " + String.format("#%06X", (0xFFFFFF & color)));
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(color));
-
         meetingColor = color;
     }
 
@@ -293,7 +294,9 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_ADD_GUESTS) {
             Log.d(TAG, "From Add Guests");
-            ArrayList<String> guests = data.getStringArrayListExtra(AddGuestsActivity.GUEST_LIST_TAG);
+            ArrayList<String> guests = new ArrayList<>();
+
+            guests = data.getStringArrayListExtra(AddGuestsActivity.GUEST_LIST_TAG);
 
             //TODO: Make new ADAPTER FOR THIS.
             llManager = new LinearLayoutManager(this);

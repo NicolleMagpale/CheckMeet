@@ -51,7 +51,6 @@ public class AddedGuestsAdapter extends RecyclerView.Adapter<AddedGuestsAdapter.
 
     public class AddedGuestViewHolder extends RecyclerView.ViewHolder{
 
-        public AddedGuestView;
         public TextView tvGuestName;
 
         public AddedGuestViewHolder(View view) {

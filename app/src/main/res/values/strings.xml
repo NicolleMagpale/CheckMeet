@@ -12,7 +12,7 @@
     <string name="meeting_year">2017</string>
     <string name="meeting_date">January 20, 2017</string>
     <string name="meeting_time">01:30 PM - 02:30 PM</string>
-    <string name="meeting_location">Gokongwei Lobby, De La Salle University</string>
+    <string name="meeting_location">Gokongwei Hall, Taft Avenue, Manila, NCR</string>
     <string name="meeting_host_name">Juan Dela Cruz</string>
     <string name="meeting_hosted_by">Hosted By:</string>
     <string name="meeting_description">
@@ -26,6 +26,10 @@
         Courtney Ngo
     </string>
 
+    <string name="group_members">
+        Hazel Anne Brosas, Mavic Reccion, Nicolle Magpale, Courtney Ngo
+    </string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -35,4 +39,5 @@
     <string name="popup_delete">Delete</string>
     <string name="popup_open_notes">Open Notes</string>
     <string name="title_activity_choose_location">Map</string>
+    <string name="title_activity_view_location">Map</string>
 </resources>

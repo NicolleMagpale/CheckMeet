@@ -139,6 +139,10 @@ public class ViewAllMeetingsFragment extends ViewMeetingsBaseFragment {
         switch(id_item) {
             case R.id.popup_edit:
                 Toast.makeText(getActivity(), "EDIT", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), EditMeetingActivity.class);
+                intent.putExtra(ViewMeetingsActivity.EXTRA_MEETING_TITLE, meetingList.get(p).getTitle());
+                intent.putExtra(ViewMeetingsActivity.EXTRA_MEETING_COLOR, meetingList.get(p).getColor());
+                startActivity(intent);
                 break;
             case R.id.popup_delete:
                 Toast.makeText(getActivity(), "DELETE", Toast.LENGTH_SHORT).show();

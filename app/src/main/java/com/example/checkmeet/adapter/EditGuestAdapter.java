@@ -18,18 +18,31 @@ import java.util.ArrayList;
  * Created by victo on 3/6/2017.
  */
 
-public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHolder> {
+public class EditGuestAdapter extends RecyclerView.Adapter<EditGuestAdapter.GuestViewHolder> {
 
     private ArrayList<String> guestListName;
-    public static String TAG = "Guest Adapter";
+    public static String TAG = "Edit Guest Adapter";
     GuestViewHolder viewHolder;
     private ArrayList<String> checked;
 
-    public GuestAdapter(ArrayList<String> guestList)
+    public EditGuestAdapter(ArrayList<String> guestList, ArrayList<String> checkedGuestList)
     {
         Log.d(TAG, "<<<<<<<<<<<<<<<<<<<<<<<<<<<ENTERED ADAPTER>>>>>>>>>>>>>>>>>>>>>>>>>>");
         guestListName = new ArrayList<>();
         this.guestListName = guestList;
+        checked = new ArrayList<>();
+        this.checked = checkedGuestList;
+        Log.d(TAG, String.valueOf(guestList.size()));
+        for(int i = 0; i< guestList.size(); i++)
+            Log.d(TAG, guestList.get(i));
+    }
+
+    public EditGuestAdapter(ArrayList<String> guestList)
+    {
+        Log.d(TAG, "<<<<<<<<<<<<<<<<<<<<<<<<<<<ENTERED ADAPTER>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        guestListName = new ArrayList<>();
+        this.guestListName = guestList;
+        checked = new ArrayList<>();
         Log.d(TAG, String.valueOf(guestList.size()));
         for(int i = 0; i< guestList.size(); i++)
             Log.d(TAG, guestList.get(i));
@@ -39,7 +52,6 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
     public GuestViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.guest_item, parent, false);
         viewHolder = new GuestViewHolder(view);
-        checked = new ArrayList<>();
         return viewHolder;
     }
 
@@ -57,7 +69,6 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
 
     public ArrayList<String> getList()
     {
-        Log.d(TAG, "YYYYYYYYYYYYYYYYYYYYYYYYYYY" + checked.size());
         return checked;
     }
 
@@ -80,6 +91,10 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
         {
             tvGuestName.setText(name);
             tvGuestName.setTypeface(CreateMeetingActivity.tf_roboto);
+            if(checked.contains(name))
+            {
+                cbGuest.setChecked(true);
+            }
             cbGuest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

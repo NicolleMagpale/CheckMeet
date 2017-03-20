@@ -49,7 +49,7 @@ public class MeetingListsAdapter extends
         String startTime_string = Utils.dateIntegerToString(startTime_int);
         int endTime_int = cursor.getInt(cursor.getColumnIndex(Meeting.COL_TIMEEND));
         String endTime_string = Utils.dateIntegerToString(endTime_int);
-        viewHolder.tv_time_meeting.setText(startTime_int + " - " + endTime_int);
+        viewHolder.tv_time_meeting.setText(startTime_string + " - " + endTime_string);
 
         // location
         String location = cursor.getString(cursor.getColumnIndex(Meeting.COL_ADDRESS));

@@ -23,6 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.checkmeet.adapter.AddedGuestsAdapter;
+import com.example.checkmeet.model.Meeting;
+import com.example.checkmeet.service.MeetingService;
+import com.example.checkmeet.utils.Utils;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
@@ -74,10 +77,20 @@ public class EditMeetingActivity extends AppCompatActivity implements SpectrumPa
 
     public static Typeface tf_roboto;
 
+    private Meeting meeting;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meeting);
+        // initData
+        int meeting_id =
+                Integer.parseInt(getIntent().getStringExtra(ViewMeetingActivity.EXTRA_MEETING_ID));
+        String address = getIntent().getStringExtra(ViewMeetingActivity.EXTRA_ADDRESS);
+        Log.e(TAG, "meeting_id = " + meeting_id );
+        Log.e(TAG, "meeting address = " + address );
+        meeting = MeetingService.getMeeting(getBaseContext(), meeting_id);
+
         initView();
     }
 
@@ -102,28 +115,30 @@ public class EditMeetingActivity extends AppCompatActivity implements SpectrumPa
         tvAddGuests = (TextView) findViewById(R.id.tv_add_guests);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        String title = getIntent().getStringExtra(ViewMeetingsActivity.EXTRA_MEETING_TITLE);
-        int color = getIntent().getIntExtra(ViewMeetingsActivity.EXTRA_MEETING_COLOR, -1);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(color));
 
-        etMeetingName.setText(title);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(meeting.getColor()));
 
-        Calendar dateToday = Calendar.getInstance();
-        tvDate.setText(dateToday.get(Calendar.MONTH) + 1 + "/" +
-                dateToday.get(Calendar.DAY_OF_MONTH) + "/" +
-                dateToday.get(Calendar.YEAR));
-        tvTimefrom.setText(convertTimeToString(dateToday.get(Calendar.HOUR_OF_DAY), dateToday.get(Calendar.MINUTE)));
-        tvTimeto.setText(convertTimeToString(dateToday.get(Calendar.HOUR_OF_DAY) + 1, dateToday.get(Calendar.MINUTE)));
-        fromHour = dateToday.get(Calendar.HOUR_OF_DAY);
-        toHour = dateToday.get(Calendar.HOUR_OF_DAY) + 1;
-        fromMinute = dateToday.get(Calendar.MINUTE);
-        toMinute = dateToday.get(Calendar.MINUTE) + 1;
+        etMeetingName.setText(meeting.getTitle());
+
+        tvDate.setText(meeting.getDate().toString());
+        tvTimefrom.setText(Utils.dateIntegerToString(meeting.getStartTime()));
+        tvTimeto.setText(Utils.dateIntegerToString(meeting.getEndTime()));
+        fromHour = Utils.getHourFromTimeInteger(meeting.getStartTime());
+        fromMinute = Utils.getMinuteFromTimeInteger(meeting.getEndTime());
+
+        if(meeting.getDescription() != null) {
+            etMeetingDescription.setText(meeting.getDescription());
+        }
+
+        tv_selected_location.setText(meeting.getAddress());
+        tv_selected_location.setVisibility(View.VISIBLE);
 
         palette.setOnColorSelectedListener(this);
         btnOpenCalendar.setOnClickListener(this);
         btnOpenFromTime.setOnClickListener(this);
         btnOpenToTime.setOnClickListener(this);
         btnAddGuests.setOnClickListener(this);
+        btnPickLocation.setOnClickListener(this);
 
         String name = "Edit Meeting"; // your string here
         SpannableString s = new SpannableString(name);

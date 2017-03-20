@@ -6,9 +6,9 @@
         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
         Google Maps Android API v2, but you must specify either coarse or fine
         location permissions for the 'MyLocation' functionality.
-   -->
+    -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -32,7 +32,7 @@
              Note that the API key is linked to the encryption key used to sign the APK.
              You need a different API key for each encryption key, including the release key that is used to
              sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -45,11 +45,12 @@
         <activity
             android:name=".view.ViewLocationActivity"
             android:label="@string/title_activity_view_location" />
-        <activity android:name=".view.AddGuestsActivity" />
         <activity
             android:name=".view.CreateMeetingActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".view.EditMeetingActivity" />
+        <activity
+            android:name=".view.EditMeetingActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".view.ViewGroupActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -59,8 +60,8 @@
         <activity
             android:name=".view.EditGroupActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.AddGuestActivity"></activity>
-
+        <activity android:name=".view.AddGuestActivity" />
+        <activity android:name=".view.OpenNotesActivity"/>
     </application>
 
 </manifest>

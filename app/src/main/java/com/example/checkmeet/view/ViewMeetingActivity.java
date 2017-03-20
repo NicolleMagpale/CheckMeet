@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,8 @@ public class ViewMeetingActivity extends AppCompatActivity implements View.OnCli
     public static final String EXTRA_LATITUDE = "EXTRA_LATITUDE";
     public static final String EXTRA_LONGITUDE = "EXTRA_LONGITUDE";
     public static final String EXTRA_ADDRESS = "EXTRA_ADDRESS";
+
+    public static final String EXTRA_MEETING_ID = "EXTRA_MEETING_ID";
 
     private Meeting meeting;
 
@@ -88,17 +91,21 @@ public class ViewMeetingActivity extends AppCompatActivity implements View.OnCli
 
         switch(id) {
             case R.id.popup_edit:
+                Log.e(TAG, "VIEW MEETING --- " + meeting.getMeeting_id());
                 Toast.makeText(this, "EDIT", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, EditMeetingActivity.class);
+                intent.putExtra(EXTRA_MEETING_ID, meeting.getMeeting_id() + "");
+                startActivity(intent);
                 break;
             case R.id.popup_delete:
                 Toast.makeText(this, "DELETE", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.popup_open_notes:
                 Toast.makeText(this, "OPEN NOTES", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, OpenNotesActivity.class);
-                intent.putExtra(Meeting.COL_MEETINGID, meeting.getMeeting_id());
-                intent.putExtra(Meeting.COL_TITLE, meeting.getTitle());
-                startActivity(intent);
+                Intent intent1 = new Intent(this, OpenNotesActivity.class);
+                intent1.putExtra(Meeting.COL_MEETINGID, meeting.getMeeting_id());
+                intent1.putExtra(Meeting.COL_TITLE, meeting.getTitle());
+                startActivity(intent1);
                 break;
             default:
                 super.onBackPressed();

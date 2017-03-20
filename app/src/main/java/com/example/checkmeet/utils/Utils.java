@@ -56,6 +56,20 @@ public class Utils {
         return time24;
     }
 
+    public static int getHourFromTimeInteger(int time) {
+        int hours = time / 100;
+
+        if(hours == 0) {
+            return 12;
+        } else if (hours <= 12) {
+            return hours;
+        } else return hours - 12;
+    }
+
+    public static int getMinuteFromTimeInteger(int time) {
+        return time % 100;
+    }
+
     private static String monthIntToString(int month) {
         switch (month) {
             case 0: return "January";

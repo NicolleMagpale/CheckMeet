@@ -111,7 +111,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
         btnOpenCalendar = (ImageButton) findViewById(R.id.btn_open_calendar);
         btnOpenToTime = (ImageButton) findViewById(R.id.btn_open_to_time);
         btnAddGuests = (ImageButton) findViewById(R.id.btn_add_guests);
-        btnPickLocation = (ImageButton) findViewById(R.id.btn_pick_location);
+        btnPickLocation = (ImageButton) findViewById(R.id.btn_pick_location_create);
 
         rvAddedGuests = (RecyclerView) findViewById(R.id.rv_added_guests);
 
@@ -135,6 +135,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements Spectrum
         btnOpenFromTime.setOnClickListener(this);
         btnOpenToTime.setOnClickListener(this);
         btnAddGuests.setOnClickListener(this);
+        btnPickLocation.setOnClickListener(this);
 
         actionBar.setDisplayHomeAsUpEnabled(true);
 

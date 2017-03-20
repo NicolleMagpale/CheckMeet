@@ -177,7 +177,7 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:id="@+id/btn_pick_location"
+                    android:id="@+id/btn_pick_location_create"
                     android:src="@drawable/ic_location_on_black_24dp"
                     android:tint="@color/material_gray_700"
                     android:background="#00000000"

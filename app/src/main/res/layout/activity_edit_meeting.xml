@@ -163,8 +163,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:id="@+id/ll_pick_location"
-                android:layout_marginBottom="10dp">
+                android:id="@+id/ll_pick_location">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
